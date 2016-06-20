@@ -26,7 +26,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.zone:zadapter:1.0.0'
     compile 'com.zone:zokhttp:1.1.2'
-//    compile project(':ZOkhttpLibrary')
 }
 //添加
 publish {
