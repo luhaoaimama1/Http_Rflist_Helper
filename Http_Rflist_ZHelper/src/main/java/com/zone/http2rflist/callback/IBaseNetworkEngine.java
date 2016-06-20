@@ -21,9 +21,9 @@ public interface IBaseNetworkEngine {
 
     void start();
 
-    void prepare(RequestParams request);
+    void sendFake(RequestParams request);
 
-    void prepare(RequestParams.Builder request);
+    void sendFake(RequestParams.Builder request);
 
     void sendhandlerMsg(String msg, int handlerTag);
 
@@ -44,7 +44,7 @@ public interface IBaseNetworkEngine {
 
     int getLimit();
 
-    void cancelByContext();
+    void cancelTag(Object obj);
 
     void cancel();
 }

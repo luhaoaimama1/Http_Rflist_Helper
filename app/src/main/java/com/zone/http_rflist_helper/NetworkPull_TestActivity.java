@@ -35,7 +35,7 @@ public class NetworkPull_TestActivity extends BaseActvity {
 		setContentView(R.layout.a_network_pull);
 		engineGet=new ZhttpEngine(this, handler);
 //		engineGet.setStartPage(1);//设置起始页
-		engineGet.prepare(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG));
+		engineGet.sendFake(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG));
 
 	}
 

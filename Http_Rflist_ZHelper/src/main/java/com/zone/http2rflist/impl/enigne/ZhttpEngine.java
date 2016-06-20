@@ -44,8 +44,11 @@ public class ZhttpEngine extends BaseNetworkEngine {
         RequestBuilderProxy requestBuilderProxy = null;
         switch (request.params.getHttpTypeNet()){
             case GET:
-                requestBuilderProxy= ok.get(request.urlString, ParamsHelper.setParamsNet(request.params),callBack);
-                    break;
+                if(request.params.isDownLoad())
+                    requestBuilderProxy= ok.downLoad(request.urlString,ParamsHelper.setParamsNet(request.params),request.params.getTarget(),callBack);
+                else
+                    requestBuilderProxy= ok.get(request.urlString, ParamsHelper.setParamsNet(request.params),callBack);
+                break;
             case HEAD:
                 requestBuilderProxy= ok.head(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
@@ -53,7 +56,7 @@ public class ZhttpEngine extends BaseNetworkEngine {
                 requestBuilderProxy= ok.delete(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
             case POST:
-                if(request.params.getHttpTypeNet().postType== HttpTypeNet.PostType.JSON)
+                if(request.params.isPostJson())
                     requestBuilderProxy= ok.postJson(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 else
                     requestBuilderProxy= ok.post(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
@@ -75,8 +78,8 @@ public class ZhttpEngine extends BaseNetworkEngine {
     }
 
     @Override
-    public void cancelByContext() {
-        ok.cancelTag(context);
+    public void cancelTag(Object obj) {
+        ok.cancelTag(obj);
     }
 
     @Override

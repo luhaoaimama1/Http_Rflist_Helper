@@ -24,10 +24,10 @@ public class NetworkNoPull_TestActivity extends BaseActvity {
 		//get传不了汉字
 		engineGet=new ZhttpEngine(this, handler);
 		engineGet.setShowDialog(true);
-		engineGet.prepare(RequestParams.get(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
+		engineGet.sendFake(RequestParams.get(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
 
 		enginePost=new ZhttpEngine(this, handler);
-		enginePost.prepare(RequestParams.post(UrlPath).params( new NetworkParams().setParamsMap(params).setFileMap(fileMap)).handlerTag(POST_TAG).build());
+		enginePost.sendFake(RequestParams.post(UrlPath).params( new NetworkParams().setParamsMap(params).setFileMap(fileMap)).handlerTag(POST_TAG).build());
 
 
 		File f = new File(FileUtils.getFile(""), "高达 - 00.mp3");
@@ -35,7 +35,7 @@ public class NetworkNoPull_TestActivity extends BaseActvity {
 		fileMap.put("upload", f);
 		fileMap.put("upload2", f2);
 		engineFile=new ZhttpEngine(this, handler,true);
-		engineFile.prepare(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).handlerTag(FILE_TAG).build());
+		engineFile.sendFake(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).handlerTag(FILE_TAG).build());
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class NetworkNoPull_TestActivity extends BaseActvity {
 	protected void onDestroy() {
 		super.onDestroy();
 		engineFile.cancel();
-//		engineFile.cancelByContext();
+//		engineFile.cancelTag();
 	}
 
 	@Override

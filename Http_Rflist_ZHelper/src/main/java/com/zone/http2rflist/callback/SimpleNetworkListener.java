@@ -15,7 +15,7 @@ public  class SimpleNetworkListener implements NetworkListener{
 	}
 
 	@Override
-	public void onLoading(long total, long current,long networkSpeed, boolean isUploading) {
+	public void onLoading(long total, long current,long networkSpeed, boolean isDone) {
 		
 	}
 

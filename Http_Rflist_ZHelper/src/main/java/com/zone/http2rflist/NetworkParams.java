@@ -140,4 +140,32 @@ public class NetworkParams {
      void setHttpTypeNet(HttpTypeNet httpTypeNet) {
         this.httpTypeNet = httpTypeNet;
     }
+
+
+    private boolean isDownLoad;
+    private File target;
+    public NetworkParams isDownLoad(File target){
+        isDownLoad=true;
+        this.target=target;
+        return this;
+    }
+
+    public boolean isDownLoad() {
+        return isDownLoad;
+    }
+
+
+    public File getTarget() {
+        return target;
+    }
+
+    private boolean isPostJson;
+
+    public boolean isPostJson() {
+        return isPostJson;
+    }
+
+    public void setPostJson(boolean postJson) {
+        isPostJson = postJson;
+    }
 }

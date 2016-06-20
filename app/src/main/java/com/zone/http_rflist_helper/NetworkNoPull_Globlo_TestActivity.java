@@ -8,6 +8,7 @@ import com.zone.http2rflist.GlobalEngine;
 import com.zone.http2rflist.NetworkParams;
 import com.zone.http2rflist.RequestParams;
 import com.zone.http2rflist.callback.NetworkListener;
+import com.zone.http2rflist.callback.SimpleNetworkListener;
 import com.zone.http2rflist.entity.SuccessType;
 import com.zone.http2rflist.impl.enigne.ZhttpEngine;
 import com.zone.http_rflist_helper.activity.BaseActvity;
@@ -27,6 +28,9 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 	static{
 		new Config().setGlobalEngine(ZhttpEngine.class);
 	}
+
+	private GlobalEngine engineDown;
+
 	@Override
 	public void setContentView() {
 		setContentView(R.layout.a_network_nopull);
@@ -35,12 +39,12 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 		
 		engineGet=new GlobalEngine(this, handler);
 		engineGet.setShowDialog(true);
-		engineGet.prepare(RequestParams.get(UrlPath)
+		engineGet.sendFake(RequestParams.get(UrlPath)
 				.params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
 		
 		enginePost=new GlobalEngine(this, handler);
-//		enginePost.sendPost(UrlPath, new RequestParamsNet().setParamsMap(prepare), POST_TAG,null);
-		enginePost.prepare(RequestParams.post(UrlPath)
+//		enginePost.sendPost(UrlPath, new RequestParamsNet().setParamsMap(sendFake), POST_TAG,null);
+		enginePost.sendFake(RequestParams.post(UrlPath)
 				.params(new NetworkParams().setParamsMap(params)).handlerTag(POST_TAG));
 
 		
@@ -49,7 +53,7 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 		fileMap.put("upload", f);
 		fileMap.put("upload2", f2);
 		engineFile=new GlobalEngine(this, handler,true);
-		engineFile.prepare(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).listener(new NetworkListener() {
+		engineFile.sendFake(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).listener(new NetworkListener() {
 			@Override
 			public void onStart() {
 
@@ -61,8 +65,8 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 			}
 
 			@Override
-			public void onLoading(long total, long current, long networkSpeed, boolean isUploading) {
-				System.out.println("isUploading:"+isUploading);
+			public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
+				System.out.println("isDone:"+ isDone);
 				System.out.println("进度："+(current*100/total));
 			}
 
@@ -73,9 +77,19 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 
 			@Override
 			public void onFailure(String msg) {
+				System.out.println(msg);
 
 			}
 		}).handlerTag(FILE_TAG));
+		engineDown=new GlobalEngine(this);
+		engineDown.sendFake(RequestParams.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe")).listener(new SimpleNetworkListener(){
+			@Override
+			public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
+				super.onLoading(total, current, networkSpeed, isDone);
+				System.out.println(" progress" + ((int) (current * 100 / total)) + "  \t networkSpeed:" + networkSpeed +
+						"  \t total:" + total + " \t current:" + current + " \t isDone:" + isDone + "");
+			}
+		}));
 	}
 
 	@Override
@@ -104,6 +118,9 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 			break;
 		case R.id.client_upload:
 			engineFile.start();
+			break;
+		case R.id.downLoad:
+			engineDown.start();
 			break;
 
 		default:

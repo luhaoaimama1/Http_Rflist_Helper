@@ -2,6 +2,8 @@ package com.zone.http2rflist;
 import com.zone.http2rflist.callback.NetworkListener;
 import com.zone.http2rflist.entity.HttpTypeNet;
 
+import java.io.File;
+
 /**
  * Created by Administrator on 2016/3/25.
  */
@@ -34,6 +36,9 @@ public class RequestParams {
     public static Builder post(String url){
         return new RequestParams.Builder().post().url(url);
     }
+    public static Builder downLoad(String url,File target){
+        return new RequestParams.Builder().downLoad(target).url(url);
+    }
 
     public static Builder postJson(String url){
         return new RequestParams.Builder().postJson().url(url);
@@ -54,7 +59,8 @@ public class RequestParams {
         private int handlerTag=-1;
         private HttpTypeNet httpTypeNet=HttpTypeNet.GET;
         private Object cancelTag;
-
+        private File target;
+        private boolean isPostJson;
         public Builder() {
         }
 
@@ -85,6 +91,11 @@ public class RequestParams {
             httpTypeNet=HttpTypeNet.GET;
             return this;
         }
+        public  Builder downLoad(File target){
+            httpTypeNet=HttpTypeNet.GET;
+            this.target=target;
+            return this;
+        }
         public  Builder head(){
             httpTypeNet=HttpTypeNet.HEAD;
             return this;
@@ -99,7 +110,8 @@ public class RequestParams {
         }
 
         public  Builder postJson(){
-            httpTypeNet=HttpTypeNet.POST.postJson();
+            httpTypeNet=HttpTypeNet.POST;
+            isPostJson=true;
             return this;
         }
 
@@ -115,6 +127,8 @@ public class RequestParams {
         public RequestParams build() {
             if(params==null)
                 params=new NetworkParams();
+            params.isDownLoad(target);
+            params.setPostJson(isPostJson);
             return new RequestParams(this);
         }
     }

@@ -14,10 +14,14 @@ public class GlobalEngine implements IBaseNetworkEngine {
     private static Class<? extends BaseNetworkEngine> engineClass;
     private BaseNetworkEngine engine;
 
+    public GlobalEngine(Context context) {
+        this(context, null, false);
+    }
     public GlobalEngine(Context context, Handler handler) {
         this(context, handler, false);
 
     }
+
     public GlobalEngine(Context context, Handler handler, boolean showDialog) {
         try {
             Constructor<? extends BaseNetworkEngine> con = engineClass.getDeclaredConstructor(Context.class, Handler.class, boolean.class);
@@ -66,13 +70,13 @@ public class GlobalEngine implements IBaseNetworkEngine {
     }
 
     @Override
-    public void prepare(RequestParams request) {
-        engine.prepare(request);
+    public void sendFake(RequestParams request) {
+        engine.sendFake(request);
     }
 
     @Override
-    public void prepare(RequestParams.Builder request) {
-        engine.prepare(request);
+    public void sendFake(RequestParams.Builder request) {
+        engine.sendFake(request);
     }
     @Override
     public void sendhandlerMsg(String msg, int handlerTag) {
@@ -120,8 +124,8 @@ public class GlobalEngine implements IBaseNetworkEngine {
     }
 
     @Override
-    public void cancelByContext() {
-        engine.cancelByContext();
+    public void cancelTag(Object obj) {
+        engine.cancelTag(obj);
     }
 
     @Override

@@ -8,7 +8,7 @@ public interface NetworkListener {
     //Success and failure at the end of the walk
     void onCancelled();
 
-    void onLoading(long total, long current,long networkSpeed,boolean isUploading);
+    void onLoading(long total, long current,long networkSpeed,boolean isDone);
 
     void onSuccess(String msg,SuccessType type);
 

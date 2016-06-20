@@ -33,9 +33,13 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 	private List<Integer> pageNumberhistory=new ArrayList<>();
 	private RequestParams request;
 
+	public BaseNetworkEngine(Context context) {
+		this(context,null,false);
+	}
 	public BaseNetworkEngine(Context context, Handler handler) {
 		this(context,handler,false);
 	}
+
 	public BaseNetworkEngine(Context context, Handler handler, boolean isShowDialog) {
 		this.context=context;
 		this.handler= handler;
@@ -82,13 +86,13 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 		execute(true);
 	}
 	@Override
-	public  void prepare(RequestParams request){
+	public  void sendFake(RequestParams request){
 		this.request=request;
 		execute(false);
 	}
 
 	@Override
-	public void prepare(RequestParams.Builder request) {
+	public void sendFake(RequestParams.Builder request) {
 		this.request=request.build();
 		execute(false);
 	}
@@ -104,6 +108,8 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 	@Override
 	// Error and success both need to send a message but remember that there must be only one out.
 	public void sendhandlerMsg(final String msg,final int handlerTag){
+		if(handler==null)
+			return ;
 		//把dialog弄掉
 		handler.post(new Runnable() {
 
