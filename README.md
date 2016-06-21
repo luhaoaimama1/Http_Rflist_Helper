@@ -12,8 +12,24 @@ A can network request and pullview Association, which does not need to handle pa
 - [x] Global settings limitcolumn = "offsetcolumn", limit = "offset" field 
 - [x] Error detection.Setmsgcheckcallback config for global settings return value 
 
+### Jcenter
+
+gradle
+
+    compile 'com.zone:http-rflist-helper:1.0.2'
+
+pom.xml
+
+     <dependency>
+       <groupId>com.zone</groupId>
+       <artifactId>http-rflist-helper</artifactId>
+       <version>1.0.2</version>
+       <type>pom</type>
+     </dependency>
+
 # Preview
 ![](./demo/demoo.gif)
+
 
 # Easy use:
 1.Global switch network request Library 
@@ -22,10 +38,10 @@ A can network request and pullview Association, which does not need to handle pa
 
 2.request for initialization
      
-     engineGet=new GlobalEngine(this, handler);
-		 engineGet.setStartPage(1);//Set start page
+     engineGet=new GlobalEngine(this, handler);//three params 's constructor  zhe three params is Open pop
+		engineGet.setStartPage(1);//Set start page
 		//handlerTag hander  Plus your own processing.  If you do not deal with it does not need to add handlertag 
-     engineGet.prepare(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG));
+    	enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
 
 3.It is not associated with the time when you want to perform this operation 
 

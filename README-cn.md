@@ -9,6 +9,22 @@
 - [x] 全局设置  limitColumn ="limit", offsetColumn ="offset"字段
 - [x] 全局设置返回值的错误检测 Config .setMsgCheckCallBack
 
+### Jcenter
+
+gradle
+
+    compile 'com.zone:http-rflist-helper:1.0.2'
+
+pom.xml
+
+     <dependency>
+       <groupId>com.zone</groupId>
+       <artifactId>http-rflist-helper</artifactId>
+       <version>1.0.2</version>
+       <type>pom</type>
+     </dependency>
+
+
 # Preview
 ![](./demo/demoo.gif)
 
@@ -19,10 +35,10 @@
 
 2.初始化请求
      
-     engineGet=new GlobalEngine(this, handler);
+     engineGet=new GlobalEngine(this, handler);//有三个构造器的 第三个是弹出 pop
 		 engineGet.setStartPage(1);//设置起始页
 		//handlerTag hander里处理加上自己的处理  如果不处理则不需要加handlerTag
-     engineGet.prepare(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG));
+     enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
 
 3.未关联的时候想要执行需要此操作
 
