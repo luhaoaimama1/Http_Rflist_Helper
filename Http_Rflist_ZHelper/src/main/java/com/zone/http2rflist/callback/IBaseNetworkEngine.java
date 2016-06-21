@@ -3,7 +3,7 @@ package com.zone.http2rflist.callback;
 import android.app.Dialog;
 
 import com.zone.http2rflist.base.BasePullView;
-import com.zone.http2rflist.RequestParams;
+import com.zone.http2rflist.Net;
 import com.zone.http2rflist.utils.Pop_Zone;
 
 /**
@@ -21,9 +21,9 @@ public interface IBaseNetworkEngine {
 
     void start();
 
-    void sendFake(RequestParams request);
+//    void sendFake(Net request);
 
-    void sendFake(RequestParams.Builder request);
+    void sendFake(Net.Builder request);
 
     void sendhandlerMsg(String msg, int handlerTag);
 

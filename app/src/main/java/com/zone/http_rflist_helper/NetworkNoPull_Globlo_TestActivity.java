@@ -5,8 +5,8 @@ import android.view.View;
 
 import com.zone.http2rflist.Config;
 import com.zone.http2rflist.GlobalEngine;
-import com.zone.http2rflist.NetworkParams;
-import com.zone.http2rflist.RequestParams;
+import com.zone.http2rflist.NetParams;
+import com.zone.http2rflist.Net;
 import com.zone.http2rflist.callback.NetworkListener;
 import com.zone.http2rflist.callback.SimpleNetworkListener;
 import com.zone.http2rflist.entity.SuccessType;
@@ -39,13 +39,12 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 		
 		engineGet=new GlobalEngine(this, handler);
 		engineGet.setShowDialog(true);
-		engineGet.sendFake(RequestParams.get(UrlPath)
-				.params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
-		
+//		engineGet.sendFake(Net.get(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
+		engineGet.sendFake(Net.get(UrlPath,new NetParams().setParamsMap(params)).handlerTag(GET_TAG));
+
 		enginePost=new GlobalEngine(this, handler);
-//		enginePost.sendPost(UrlPath, new RequestParamsNet().setParamsMap(sendFake), POST_TAG,null);
-		enginePost.sendFake(RequestParams.post(UrlPath)
-				.params(new NetworkParams().setParamsMap(params)).handlerTag(POST_TAG));
+//		enginePost.sendFake(Net.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(POST_TAG));
+		enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
 
 		
 		File f = new File(FileUtils.getFile(""), "高达 - 00.mp3");
@@ -53,45 +52,48 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 		fileMap.put("upload", f);
 		fileMap.put("upload2", f2);
 		engineFile=new GlobalEngine(this, handler,true);
-		engineFile.sendFake(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).listener(new NetworkListener() {
-			@Override
-			public void onStart() {
-
-			}
-
-			@Override
-			public void onCancelled() {
-
-			}
-
-			@Override
-			public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
-				System.out.println("isDone:"+ isDone);
-				System.out.println("进度："+(current*100/total));
-			}
-
-			@Override
-			public void onSuccess(String msg, SuccessType type) {
-
-			}
-
-			@Override
-			public void onFailure(String msg) {
-				System.out.println(msg);
-
-			}
-		}).handlerTag(FILE_TAG));
+//		engineFile.sendFake(Net.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).listener(listenr).handlerTag(FILE_TAG));
+		engineFile.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params).setFileMap(fileMap),listenr).handlerTag(FILE_TAG));
 		engineDown=new GlobalEngine(this);
-		engineDown.sendFake(RequestParams.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe")).listener(new SimpleNetworkListener(){
-			@Override
-			public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
-				super.onLoading(total, current, networkSpeed, isDone);
-				System.out.println(" progress" + ((int) (current * 100 / total)) + "  \t networkSpeed:" + networkSpeed +
-						"  \t total:" + total + " \t current:" + current + " \t isDone:" + isDone + "");
-			}
-		}));
+//		engineDown.sendFake(Net.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe")).listener(simple));
+		engineDown.sendFake(Net.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe"),simple));
 	}
+	SimpleNetworkListener simple=new SimpleNetworkListener(){
+		@Override
+		public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
+			super.onLoading(total, current, networkSpeed, isDone);
+			System.out.println(" progress" + ((int) (current * 100 / total)) + "  \t networkSpeed:" + networkSpeed +
+					"  \t total:" + total + " \t current:" + current + " \t isDone:" + isDone + "");
+		}
+	};
+	NetworkListener listenr=new NetworkListener() {
+		@Override
+		public void onStart() {
 
+		}
+
+		@Override
+		public void onCancelled() {
+
+		}
+
+		@Override
+		public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
+			System.out.println("isDone:"+ isDone);
+			System.out.println("进度："+(current*100/total));
+		}
+
+		@Override
+		public void onSuccess(String msg, SuccessType type) {
+
+		}
+
+		@Override
+		public void onFailure(String msg) {
+			System.out.println(msg);
+
+		}
+	};
 	@Override
 	public void findIDs() {
 

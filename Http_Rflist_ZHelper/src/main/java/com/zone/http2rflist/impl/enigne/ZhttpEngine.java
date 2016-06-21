@@ -4,9 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import com.zone.http2rflist.base.BaseNetworkEngine;
-import com.zone.http2rflist.RequestParams;
+import com.zone.http2rflist.Net;
 import com.zone.http2rflist.callback.NetworkListener;
-import com.zone.http2rflist.entity.HttpTypeNet;
 import com.zone.http2rflist.entity.SuccessType;
 import com.zone.http2rflist.impl.enigne.helper.ParamsHelper;
 import com.zone.http2rflist.impl.pop.NetPop;
@@ -38,7 +37,7 @@ public class ZhttpEngine extends BaseNetworkEngine {
     }
 
     @Override
-    protected void ab_Send(RequestParams request) {
+    protected void ab_Send(Net request) {
         this.listener=request.listener;
         this.handlerTag =request.handlerTag;
         RequestBuilderProxy requestBuilderProxy = null;

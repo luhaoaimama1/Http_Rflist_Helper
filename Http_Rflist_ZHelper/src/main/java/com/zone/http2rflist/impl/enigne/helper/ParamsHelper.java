@@ -1,6 +1,6 @@
 package com.zone.http2rflist.impl.enigne.helper;
 
-import com.zone.http2rflist.NetworkParams;
+import com.zone.http2rflist.NetParams;
 import com.zone.okhttp.RequestParams;
 
 import java.io.File;
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class ParamsHelper {
     //Pay attention to the request mode not in the past!!!!!! 
-    public static RequestParams setParamsNet(NetworkParams params){
+    public static RequestParams setParamsNet(NetParams params){
         RequestParams rParams = new RequestParams();
         if (params.getHeaderReplaceMap()!=null)
             rParams.setHeaderReplaceMap(params.getHeaderReplaceMap());

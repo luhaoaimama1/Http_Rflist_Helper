@@ -69,13 +69,13 @@ public class GlobalEngine implements IBaseNetworkEngine {
         engine.start();
     }
 
-    @Override
-    public void sendFake(RequestParams request) {
-        engine.sendFake(request);
-    }
+//    @Override
+//    public void sendFake(Net request) {
+//        engine.sendFake(request);
+//    }
 
     @Override
-    public void sendFake(RequestParams.Builder request) {
+    public void sendFake(Net.Builder request) {
         engine.sendFake(request);
     }
     @Override

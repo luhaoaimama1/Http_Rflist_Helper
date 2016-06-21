@@ -5,8 +5,8 @@ import android.widget.ListView;
 import com.bumptech.glide.Glide;
 import com.zone.adapter.QuickAdapter;
 import com.zone.adapter.callback.Helper;
-import com.zone.http2rflist.NetworkParams;
-import com.zone.http2rflist.RequestParams;
+import com.zone.http2rflist.NetParams;
+import com.zone.http2rflist.Net;
 import com.zone.http2rflist.impl.enigne.ZhttpEngine;
 import com.zone.http_rflist_helper.pullview.UltraPullView;
 import com.zone.http_rflist_helper.activity.BaseActvity;
@@ -35,7 +35,8 @@ public class NetworkPull_TestActivity extends BaseActvity {
 		setContentView(R.layout.a_network_pull);
 		engineGet=new ZhttpEngine(this, handler);
 //		engineGet.setStartPage(1);//设置起始页
-		engineGet.sendFake(RequestParams.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG));
+//		engineGet.sendFake(Net.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG));
+		engineGet.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(GET_TAG));
 
 	}
 

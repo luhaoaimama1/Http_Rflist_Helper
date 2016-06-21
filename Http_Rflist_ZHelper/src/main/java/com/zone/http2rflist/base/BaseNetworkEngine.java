@@ -3,7 +3,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import com.google.gson.Gson;
-import com.zone.http2rflist.RequestParams;
+import com.zone.http2rflist.Net;
 import com.zone.http2rflist.callback.IBaseNetworkEngine;
 import com.zone.http2rflist.utils.Pop_Zone;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 	protected boolean isLastPage =false;
 	//When the current page is to prevent processing and then flip flip parameters.
 	private List<Integer> pageNumberhistory=new ArrayList<>();
-	private RequestParams request;
+	private Net request;
 
 	public BaseNetworkEngine(Context context) {
 		this(context,null,false);
@@ -85,14 +85,14 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 	public void start(){
 		execute(true);
 	}
-	@Override
-	public  void sendFake(RequestParams request){
-		this.request=request;
-		execute(false);
-	}
+//	@Override
+//	public  void sendFake(Net request){
+//		this.request=request;
+//		execute(false);
+//	}
 
 	@Override
-	public void sendFake(RequestParams.Builder request) {
+	public void sendFake(Net.Builder request) {
 		this.request=request.build();
 		execute(false);
 	}
@@ -177,7 +177,7 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 			request.params.put(offsetColumn, offest + "");
 		}
 	}
-	protected abstract void ab_Send(RequestParams request);
+	protected abstract void ab_Send(Net request);
 
 	//Set default dialog
 	protected  abstract Dialog createDefaultDialog(Context context);
