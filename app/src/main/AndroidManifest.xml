@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".NetworkNoPull_Globlo_TestActivity"></activity>
         <activity android:name=".NetworkPull_TestActivity"></activity>
-        <activity android:name=".NetworkNoPull_TestActivity"></activity>
     </application>
 
 </manifest>

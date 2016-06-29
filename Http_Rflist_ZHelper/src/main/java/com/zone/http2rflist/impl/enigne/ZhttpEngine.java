@@ -41,30 +41,31 @@ public class ZhttpEngine extends BaseNetworkEngine {
         this.listener=request.listener;
         this.handlerTag =request.handlerTag;
         RequestBuilderProxy requestBuilderProxy = null;
+        String urlString = request.getResetString();//replace  request.urlString
         switch (request.params.getHttpTypeNet()){
             case GET:
                 if(request.params.isDownLoad())
-                    requestBuilderProxy= ok.downLoad(request.urlString,ParamsHelper.setParamsNet(request.params),request.params.getTarget(),callBack);
+                    requestBuilderProxy= ok.downLoad(urlString,ParamsHelper.setParamsNet(request.params),request.params.getTarget(),callBack);
                 else
-                    requestBuilderProxy= ok.get(request.urlString, ParamsHelper.setParamsNet(request.params),callBack);
+                    requestBuilderProxy= ok.get(urlString, ParamsHelper.setParamsNet(request.params),callBack);
                 break;
             case HEAD:
-                requestBuilderProxy= ok.head(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
+                requestBuilderProxy= ok.head(urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
             case DELETE:
-                requestBuilderProxy= ok.delete(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
+                requestBuilderProxy= ok.delete(urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
             case POST:
                 if(request.params.isPostJson())
-                    requestBuilderProxy= ok.postJson(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
+                    requestBuilderProxy= ok.postJson(urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 else
-                    requestBuilderProxy= ok.post(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
+                    requestBuilderProxy= ok.post(urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
             case PUT:
-                requestBuilderProxy=  ok.put(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
+                requestBuilderProxy=  ok.put(urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
             case PATCH:
-                requestBuilderProxy= ok.patch(request.urlString, ParamsHelper.setParamsNet(request.params), callBack);
+                requestBuilderProxy= ok.patch(urlString, ParamsHelper.setParamsNet(request.params), callBack);
                 break;
             default:
                 break;

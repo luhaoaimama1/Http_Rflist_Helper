@@ -13,8 +13,9 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  */
 public abstract class UltraPullView<E, A> extends BasePullView<PtrFrameLayout,ListView, QuickAdapter,E, A> {
     private boolean loadMoreFail=false;
-    public UltraPullView(PtrFrameLayout pullView, ListView listView, QuickAdapter adapter, List<E> data) {
-        super(adapter.getContext(),pullView, listView, adapter, data);
+    public UltraPullView(PtrFrameLayout pullView, ListView listView) {
+        super(listView.getContext(),pullView,listView,(QuickAdapter)listView.getAdapter(),
+                ((QuickAdapter)listView.getAdapter()).getData());
         pullViewSetListener();
     }
     private void pullViewSetListener() {

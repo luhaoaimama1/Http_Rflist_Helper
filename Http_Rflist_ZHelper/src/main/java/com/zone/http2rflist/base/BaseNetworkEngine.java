@@ -12,6 +12,8 @@ import java.util.List;
 //This is  handle network requests dialog and handler return information
 public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 
+	private ResetUrlCallback mResetUrlCallback;
+
 	public enum DialogType{
 		pop,dialog;
 	}
@@ -171,11 +173,18 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 	}
 	private void relateAddTurnPage(){
 		if(listView!=null){
-			request.params.put(limitColumn, limit + "");
 			pageNumberhistory.add(pageNumber);
-	        int offest = limit* pageNumber;
-			request.params.put(offsetColumn, offest + "");
+			int offset = limit* pageNumber;
+			if (mResetUrlCallback==null) {
+				request.params.put(limitColumn, limit + "");
+				request.params.put(offsetColumn, offset + "");
+			}else
+				request.setResetString(mResetUrlCallback.resetQuestUrlByTurnPage(request.urlString
+						,limitColumn,limit,offsetColumn,offset,pageNumber));
 		}
+	}
+	public void addResetUrl(ResetUrlCallback callback){
+		this.mResetUrlCallback=callback;
 	}
 	protected abstract void ab_Send(Net request);
 
@@ -263,4 +272,5 @@ public abstract class BaseNetworkEngine implements IBaseNetworkEngine {
 	public static void setOffsetColumn(String offsetColumn) {
 		BaseNetworkEngine.offsetColumn = offsetColumn;
 	}
+
 }

@@ -47,4 +47,10 @@ public interface IBaseNetworkEngine {
     void cancelTag(Object obj);
 
     void cancel();
+    void addResetUrl(ResetUrlCallback callback);
+    interface ResetUrlCallback {
+        String resetQuestUrlByTurnPage(String url,
+                                       String limitColumn, int limit,
+                                       String offsetColumn, int offset, int pageNumber);
+    }
 }

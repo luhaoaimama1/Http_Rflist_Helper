@@ -84,6 +84,11 @@ public class GlobalEngine implements IBaseNetworkEngine {
     }
 
     @Override
+    public void addResetUrl(ResetUrlCallback callback) {
+        engine.addResetUrl(callback);
+    }
+
+    @Override
     public void relatePullView(BasePullView listView) {
         engine.relatePullView(listView);
     }

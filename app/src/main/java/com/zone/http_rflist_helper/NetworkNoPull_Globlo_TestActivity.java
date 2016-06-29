@@ -2,15 +2,12 @@ package com.zone.http_rflist_helper;
 
 import android.os.Message;
 import android.view.View;
+import android.widget.ProgressBar;
 
-import com.zone.http2rflist.Config;
 import com.zone.http2rflist.GlobalEngine;
 import com.zone.http2rflist.NetParams;
 import com.zone.http2rflist.Net;
-import com.zone.http2rflist.callback.NetworkListener;
 import com.zone.http2rflist.callback.SimpleNetworkListener;
-import com.zone.http2rflist.entity.SuccessType;
-import com.zone.http2rflist.impl.enigne.ZhttpEngine;
 import com.zone.http_rflist_helper.activity.BaseActvity;
 import com.zone.http_rflist_helper.utils.FileUtils;
 
@@ -23,77 +20,75 @@ public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
 	final	String UrlPath = Constant.ADDRESS;
 	private GlobalEngine engineGet,enginePost,engineFile;
 	private static final int GET_TAG=1,POST_TAG=2,FILE_TAG=3;
-	Map<String,String> params=new HashMap<String,String>();
-	Map<String,File> fileMap=new HashMap<String,File>();
-	static{
-		new Config().setGlobalEngine(ZhttpEngine.class);
-	}
-
+	Map<String,String> params=new HashMap<>();
+	Map<String,File> fileMap=new HashMap<>();
 	private GlobalEngine engineDown;
+	private ProgressBar progressBar2;
 
 	@Override
 	public void setContentView() {
 		setContentView(R.layout.a_network_nopull);
 		params.put("name", "疯子");
+		progressBar2=(ProgressBar)findViewById(R.id.progressBar2);
+		httpGet();
+		httpPost();
+		httpUpload();
+		httpDownload();
+	}
 
-		
-		engineGet=new GlobalEngine(this, handler);
-		engineGet.setShowDialog(true);
-//		engineGet.sendFake(Net.get(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
-		engineGet.sendFake(Net.get(UrlPath,new NetParams().setParamsMap(params)).handlerTag(GET_TAG));
+	private void httpDownload() {
+		engineDown=new GlobalEngine(this);
+//		engineDown.sendFake(Net.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe")).listener(simple));
+		engineDown.sendFake(Net.downLoad("http://down.360safe.com/360/inst.exe", FileUtils.getFile("","360.exe"),simple));
+	}
 
-		enginePost=new GlobalEngine(this, handler);
-//		enginePost.sendFake(Net.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(POST_TAG));
-		enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
-
-		
+	private void httpUpload() {
 		File f = new File(FileUtils.getFile(""), "高达 - 00.mp3");
 		File f2 = new File(FileUtils.getFile("DCIM", "Camera"), "20150619_091758.jpg");
 		fileMap.put("upload", f);
 		fileMap.put("upload2", f2);
 		engineFile=new GlobalEngine(this, handler,true);
 //		engineFile.sendFake(Net.post(UrlPath).params(new NetworkParams().setParamsMap(params).setFileMap(fileMap)).listener(listenr).handlerTag(FILE_TAG));
-		engineFile.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params).setFileMap(fileMap),listenr).handlerTag(FILE_TAG));
-		engineDown=new GlobalEngine(this);
-//		engineDown.sendFake(Net.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe")).listener(simple));
-		engineDown.sendFake(Net.downLoad("http://down.360safe.com/360/inst.exe",FileUtils.getFile("","360.exe"),simple));
+		engineFile.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params).setFileMap(fileMap),simple).handlerTag(FILE_TAG));
 	}
+
+	private void httpPost() {
+		enginePost=new GlobalEngine(this, handler);
+//		enginePost.sendFake(Net.post(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(POST_TAG));
+		enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
+	}
+
+	private void httpGet() {
+		//get传不了汉字
+		engineGet=new GlobalEngine(this, handler);
+		engineGet.setShowDialog(true);
+//		engineGet.sendFake(Net.httpGet(UrlPath).params(new NetworkParams().setParamsMap(params)).handlerTag(GET_TAG).build());
+		engineGet.sendFake(Net.get(UrlPath,new NetParams().setParamsMap(params)).handlerTag(GET_TAG));
+	}
+
 	SimpleNetworkListener simple=new SimpleNetworkListener(){
+		@Override
+		public void onStart() {
+			progressBar2.setMax(100);
+			super.onStart();
+		}
+
 		@Override
 		public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
 			super.onLoading(total, current, networkSpeed, isDone);
+			progressBar2.setProgress(((int) (current * 100 / total))
+			);
 			System.out.println(" progress" + ((int) (current * 100 / total)) + "  \t networkSpeed:" + networkSpeed +
 					"  \t total:" + total + " \t current:" + current + " \t isDone:" + isDone + "");
-		}
-	};
-	NetworkListener listenr=new NetworkListener() {
-		@Override
-		public void onStart() {
 
 		}
-
-		@Override
-		public void onCancelled() {
-
-		}
-
-		@Override
-		public void onLoading(long total, long current, long networkSpeed, boolean isDone) {
-			System.out.println("isDone:"+ isDone);
-			System.out.println("进度："+(current*100/total));
-		}
-
-		@Override
-		public void onSuccess(String msg, SuccessType type) {
-
-		}
-
 		@Override
 		public void onFailure(String msg) {
 			System.out.println(msg);
 
 		}
 	};
+
 	@Override
 	public void findIDs() {
 

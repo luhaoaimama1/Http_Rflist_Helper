@@ -3,8 +3,15 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:layout_height="match_parent" >
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="get post 上传文件的 需要配置地址才可以用! 下载没事~"
+        android:textSize="20dp"
+        android:textColor="#ff3434" />
     <Button
         android:id="@+id/client_get"
         android:layout_width="wrap_content"
@@ -35,5 +42,11 @@
         android:layout_margin="4dp"
         android:onClick="onClick"
         android:text="下载文件" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar2" />
 
 </LinearLayout>

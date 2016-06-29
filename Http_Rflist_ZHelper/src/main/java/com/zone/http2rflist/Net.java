@@ -10,7 +10,8 @@ import java.io.File;
 public class Net {
   public  final NetParams params;
   public final NetworkListener listener;
-  public  final  String urlString;
+  public final  String urlString;
+  private   String resetString;//real url
   public final int handlerTag;
   public final Object cancelTag;
   public final HttpTypeNet httpTypeNet;
@@ -19,6 +20,7 @@ public class Net {
         this.params = builder.params;
         this.listener = builder.listener;
         this.urlString = builder.urlString;
+        this.resetString = urlString;
         this.handlerTag = builder.handlerTag;
         this.cancelTag = builder.cancelTag;
         this.httpTypeNet = builder.httpTypeNet;
@@ -182,9 +184,18 @@ public class Net {
         public Net build() {
             if(params==null)
                 params=new NetParams();
-            params.isDownLoad(target);
+            if (target!=null)
+                params.setTarget(target);
             params.setPostJson(isPostJson);
             return new Net(this);
         }
+    }
+
+    public String getResetString() {
+        return resetString;
+    }
+
+    public void setResetString(String resetString) {
+        this.resetString = resetString;
     }
 }

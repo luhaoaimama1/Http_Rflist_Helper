@@ -144,7 +144,7 @@ public class NetParams {
 
     private boolean isDownLoad;
     private File target;
-    public NetParams isDownLoad(File target){
+    public NetParams setTarget(File target){
         isDownLoad=true;
         this.target=target;
         return this;
