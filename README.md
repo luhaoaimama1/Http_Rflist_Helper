@@ -16,14 +16,14 @@ A can network request and pullview Association, which does not need to handle pa
 
 gradle
 
-    compile 'com.zone:http-rflist-helper:1.0.2'
+    compile 'com.zone:http-rflist-helper:1.0.3'
 
 pom.xml
 
      <dependency>
        <groupId>com.zone</groupId>
        <artifactId>http-rflist-helper</artifactId>
-       <version>1.0.2</version>
+       <version>1.0.3</version>
        <type>pom</type>
      </dependency>
 
@@ -39,22 +39,26 @@ pom.xml
 2.request for initialization
      
      engineGet=new GlobalEngine(this, handler);//three params 's constructor  zhe three params is Open pop
-		engineGet.setStartPage(1);//Set start page
-		//handlerTag hander  Plus your own processing.  If you do not deal with it does not need to add handlertag 
-    	enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
+	 //engineGet.setStartPage(1);//Set start page  
+	 //handlerTag hander  Plus your own processing.  If you do not deal with it does not need to add handlertag 
+     enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
 
 3.It is not associated with the time when you want to perform this operation 
 
 	engineGet.start();
 
-4.Association pullview will automatically execute
+4.Association pullview will automatically execute 
   
-	googlePullView=new UltraPullView<String, Data>(swipe_container, rv, adapter, dataImg) {
+	googlePullView=new UltraPullView<MeiZiData.ResultsBean, MeiZiData>(swipe_container, rv) {
 			@Override
-			public List<String> getAdapterData(Data entity) {
-				return entity.getImgEntity().getImg();
+			public List<MeiZiData.ResultsBean> getAdapterData(MeiZiData entity) {
+				return entity.getResults();
 			}
 		};
-		engineGet.relatePullView(googlePullView);
-		
+	engineGet.relatePullView(googlePullView);
+
+5.Association pullview will execute by myself ---firstPage
+	 
+	 engineGet.firstPage();
+	 
 Advanced operation and skills please see demo; 

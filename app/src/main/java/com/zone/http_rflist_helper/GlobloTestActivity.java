@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //TODO  listener有问题  null或者 有的时候不应该会有消息
-public class NetworkNoPull_Globlo_TestActivity extends BaseActvity {
+public class GlobloTestActivity extends BaseActvity {
 	final	String UrlPath = Constant.ADDRESS;
 	private GlobalEngine engineGet,enginePost,engineFile;
 	private static final int GET_TAG=1,POST_TAG=2,FILE_TAG=3;

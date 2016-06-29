@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NetworkNoPull_Globlo_TestActivity"></activity>
-        <activity android:name=".NetworkPull_TestActivity"></activity>
+        <activity android:name=".GlobloTestActivity"></activity>
+        <activity android:name=".ListTestActivity"></activity>
     </application>
 
 </manifest>

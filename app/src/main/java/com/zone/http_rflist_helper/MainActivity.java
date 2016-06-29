@@ -35,10 +35,10 @@ public class MainActivity extends BaseActvity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.noPull_GloboTest:
-                startActivity(new Intent(this, NetworkNoPull_Globlo_TestActivity.class));
+                startActivity(new Intent(this, GlobloTestActivity.class));
                 break;
             case R.id.pullGet:
-                startActivity(new Intent(this, NetworkPull_TestActivity.class));
+                startActivity(new Intent(this, ListTestActivity.class));
                 break;
 
             default:

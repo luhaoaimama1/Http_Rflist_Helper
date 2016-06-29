@@ -19,7 +19,7 @@ import java.util.List;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 
-public class NetworkPull_TestActivity extends BaseActvity {
+public class ListTestActivity extends BaseActvity {
 	private PtrFrameLayout swipe_container;
 	private ListView rv;
 	private GlobalEngine engineGet;

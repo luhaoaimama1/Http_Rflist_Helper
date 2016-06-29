@@ -13,14 +13,14 @@
 
 gradle
 
-    compile 'com.zone:http-rflist-helper:1.0.2'
+    compile 'com.zone:http-rflist-helper:1.0.3'
 
 pom.xml
 
      <dependency>
        <groupId>com.zone</groupId>
        <artifactId>http-rflist-helper</artifactId>
-       <version>1.0.2</version>
+       <version>1.0.3</version>
        <type>pom</type>
      </dependency>
 
@@ -36,8 +36,8 @@ pom.xml
 2.初始化请求
      
      engineGet=new GlobalEngine(this, handler);//有三个构造器的 第三个是弹出 pop
-		 engineGet.setStartPage(1);//设置起始页
-		//handlerTag hander里处理加上自己的处理  如果不处理则不需要加handlerTag
+	 //engineGet.setStartPage(1);//设置起始页
+	 //handlerTag hander里处理加上自己的处理  如果不处理则不需要加handlerTag
      enginePost.sendFake(Net.post(UrlPath,new NetParams().setParamsMap(params)).handlerTag(POST_TAG));
 
 3.未关联的时候想要执行需要此操作
@@ -47,11 +47,14 @@ pom.xml
 4.关联pullview  会自动执行
   
 	googlePullView=new UltraPullView<String, Data>(swipe_container, rv, adapter, dataImg) {
-			@Override
-			public List<String> getAdapterData(Data entity) {
-				return entity.getImgEntity().getImg();
-			}
-		};
-		engineGet.relatePullView(googlePullView);
+    			@Override
+    			public List<String> getAdapterData(Data entity) {
+    				return entity.getImgEntity().getImg();
+    			}
+    		};
+    		engineGet.relatePullView(googlePullView);
 		
+5.关联pullview 后想自己执行 第一页
+	 
+	 engineGet.firstPage();
 高级操作与技巧请看demo;
