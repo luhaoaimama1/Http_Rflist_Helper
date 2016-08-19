@@ -9,21 +9,21 @@
 - [x] 全局设置  limitColumn ="limit", offsetColumn ="offset"字段
 - [x] 全局设置返回值的错误检测 Config .setMsgCheckCallBack
 
-### Jcenter
+### JicPack
+Add it in your root build.gradle at the end of repositories:
 
-gradle
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+Step 2. Add the dependency
 
-    compile 'com.zone:http-rflist-helper:1.0.3'
-
-pom.xml
-
-     <dependency>
-       <groupId>com.zone</groupId>
-       <artifactId>http-rflist-helper</artifactId>
-       <version>1.0.3</version>
-       <type>pom</type>
-     </dependency>
-
+	dependencies {
+    	   compile 'com.github.luhaoaimama1:Http_Rflist_Helper:1.0.4'
+    	}
+    
 
 # Preview
 ![](./demo/demoo.gif)

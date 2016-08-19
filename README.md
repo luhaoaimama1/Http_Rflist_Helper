@@ -12,20 +12,21 @@ A can network request and pullview Association, which does not need to handle pa
 - [x] Global settings limitcolumn = "offsetcolumn", limit = "offset" field 
 - [x] Error detection.Setmsgcheckcallback config for global settings return value 
 
-### Jcenter
+### JicPack
+Add it in your root build.gradle at the end of repositories:
 
-gradle
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+Step 2. Add the dependency
 
-    compile 'com.zone:http-rflist-helper:1.0.3'
-
-pom.xml
-
-     <dependency>
-       <groupId>com.zone</groupId>
-       <artifactId>http-rflist-helper</artifactId>
-       <version>1.0.3</version>
-       <type>pom</type>
-     </dependency>
+	dependencies {
+    	   compile 'com.github.luhaoaimama1:Http_Rflist_Helper:1.0.4'
+    	}
+    
 
 # Preview
 ![](./demo/demoo.gif)
