@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
-
+//apply plugin: 'com.novoda.bintray-release'//添加
+// JitPack Maven
+apply plugin: 'com.github.dcendents.android-maven'
+// Your Group
+group='com.github.luhaoaimama1'
 android {
     compileSdkVersion 22
     buildToolsVersion '23.0.3'
@@ -27,15 +30,15 @@ dependencies {
     compile 'com.zone:zadapter:1.0.3'
     compile 'com.zone:zokhttp:1.1.2'
 }
-//添加
-publish {
-    userOrg = 'luhaoaimama1'//bintray.com用户名
-    groupId = 'com.zone'//jcenter上的路径
-    artifactId = 'http-rflist-helper'//项目名称
-    publishVersion = '1.0.3'//版本号
-    desc = 'http_rflist_helper is about http and rflist  util  ~'//描述，不重要
-    website = 'https://github.com/luhaoaimama1'//网站，不重要
-}
+////添加
+//publish {
+//    userOrg = 'luhaoaimama1'//bintray.com用户名
+//    groupId = 'com.zone'//jcenter上的路径
+//    artifactId = 'http-rflist-helper'//项目名称
+//    publishVersion = '1.0.3'//版本号
+//    desc = 'http_rflist_helper is about http and rflist  util  ~'//描述，不重要
+//    website = 'https://github.com/luhaoaimama1'//网站，不重要
+//}
 
 
 
