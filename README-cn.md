@@ -20,10 +20,7 @@ Add it in your root build.gradle at the end of repositories:
 	}
 Step 2. Add the dependency
 
-	dependencies {
-    	   compile 'com.github.luhaoaimama1:Http_Rflist_Helper:1.0.4'
-    	}
-    
+>  compile 'com.github.luhaoaimama1:Http_Rflist_Helper:[Latest release](https://github.com/luhaoaimama1/Http_Rflist_Helper/releases)'
 
 # Preview
 ![](./demo/demoo.gif)
