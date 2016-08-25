@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Http_Rflist_ZHelper" />
-            <option value="$PROJECT_DIR$/UltraRefresh" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
@@ -18,7 +17,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Http_Rflist_ZHelper" />
-            <option value="$PROJECT_DIR$/UltraRefresh" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

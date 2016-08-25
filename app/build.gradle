@@ -28,6 +28,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
 //    compile project(':Http_Rflist_ZHelper')
     compile 'com.github.luhaoaimama1:Http_Rflist_Helper:1.0.4'
-    compile project(':UltraRefresh')
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.luhaoaimama1:ZUltraHelper:1.0.0'
 }
